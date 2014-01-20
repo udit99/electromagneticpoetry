@@ -1,5 +1,5 @@
 var amp = {};
-amp.words = ["hello", "world"]
+amp.words = ["hello", "world", "steve"]
 amp.locationSortedWords = function(){
   var words = _.map(amp.words, function(a){ 
     return {
@@ -27,6 +27,7 @@ amp.sortedWordsWithRelativeDistances = function(){
   });
 }
 $(function(){
+  _.each(amp.words, function(word){$("#" + word).draggable({containment: "#jail"})});
   $("#hello").draggable({containment: "#jail"});
   $("#world").draggable({containment: "#jail"});
   $("#container").droppable({
