@@ -11,12 +11,18 @@ amp.locationSortedWords = function(){
 }
 
 amp.sortedWordsWithRelativeDistances = function(){
-  var startingOffset = this.locationSortedWords()[0].left_location;
   var sortedWords = this.locationSortedWords();
-  return _.map(sortedWords, function(word){
+  return _.map(sortedWords, function(word, index, words){
+    var leftOffsetIncludingWidth = 0;
+    if(index != 0){
+      var previous_word = words[index - 1]
+      leftOffsetIncludingWidth = previous_word.left_location + $("#" + previous_word.name).width();
+    }else{
+      leftOffsetIncludingWidth = word.left_location;
+    }
     return {
       name: word.name,
-      relative_location: (word.left_location - startingOffset)
+      relative_location: (word.left_location - leftOffsetIncludingWidth)
     };
   });
 }
