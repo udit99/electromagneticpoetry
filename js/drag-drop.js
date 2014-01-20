@@ -30,8 +30,6 @@ amp.audio = {
   }
 };
 amp.buffers = {};
-amp.buffers.snare = null;
-amp.buffers.hihat = null;
 amp.context = new webkitAudioContext();
 amp.loadSound = function(url, hash_store, key) {
   var request = new XMLHttpRequest();
@@ -46,15 +44,25 @@ amp.loadSound = function(url, hash_store, key) {
   }
   request.send();
 }
-amp.playSound = function(buffer, time) {
+amp.playSound = function(bufferName, time) {
   var source = amp.context.createBufferSource();
-  source.buffer = buffer;
+  source.buffer = amp.buffers[bufferName];
   source.connect(amp.context.destination);
   source.noteOn(time);
 } 
 
+amp.playWords = function(){
+  _.each(this.sortedWordsWithRelativeDistances(), function(word){
+  
+  });
+
+}
+
 $(function(){
-  amp.loadSound("http://localhost:3002/hello.wav", amp.buffers, "snare");
+  _.each(amp.words, function(word){
+    amp.loadSound("http://localhost:3002/"+ word +".wav", amp.buffers,word);
+  
+  })
   _.each(amp.words, function(word){$("#" + word).draggable({containment: "#jail"})});
   $("#hello").draggable({containment: "#jail"});
   $("#world").draggable({containment: "#jail"});
