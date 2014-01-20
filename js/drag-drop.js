@@ -52,11 +52,15 @@ amp.loadSound = function(url, hash_store, key) {
   }
   request.send();
 }
-
-
-
+amp.playSound = function(buffer, time) {
+  var source = amp.context.createBufferSource();
+  source.buffer = buffer;
+  source.connect(amp.context.destination);
+  source.noteOn(time);
+} 
 
 $(function(){
+  amp.loadSound("http://localhost:3002/hihat.wav", amp.buffers, "snare");
   _.each(amp.words, function(word){$("#" + word).draggable({containment: "#jail"})});
   $("#hello").draggable({containment: "#jail"});
   $("#world").draggable({containment: "#jail"});
