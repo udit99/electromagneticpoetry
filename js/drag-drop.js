@@ -13,16 +13,10 @@ amp.locationSortedWords = function(){
 amp.sortedWordsWithRelativeDistances = function(){
   var sortedWords = this.locationSortedWords();
   return _.map(sortedWords, function(word, index, words){
-    var leftOffsetIncludingWidth = 0;
-    if(index != 0){
-      var previous_word = words[index - 1]
-      leftOffsetIncludingWidth = previous_word.left_location + $("#" + previous_word.name).width();
-    }else{
-      leftOffsetIncludingWidth = word.left_location;
-    }
+    var firstWordLeftOffset = words[0].left_location;
     return {
       name: word.name,
-      relative_location: (word.left_location - leftOffsetIncludingWidth)
+      relative_location: (word.left_location - firstWordLeftOffset)
     };
   });
 }
@@ -60,7 +54,7 @@ amp.playSound = function(buffer, time) {
 } 
 
 $(function(){
-  amp.loadSound("http://localhost:3002/hihat.wav", amp.buffers, "snare");
+  amp.loadSound("http://localhost:3002/hello.wav", amp.buffers, "snare");
   _.each(amp.words, function(word){$("#" + word).draggable({containment: "#jail"})});
   $("#hello").draggable({containment: "#jail"});
   $("#world").draggable({containment: "#jail"});
