@@ -8,7 +8,17 @@ amp.locationSortedWords = function(){
     };
   });
    return _.sortBy(words, function(b){return b.left_location});
+}
 
+amp.sortedWordsWithRelativeDistances = function(){
+  var startingOffset = this.locationSortedWords()[0].left_location;
+  var sortedWords = this.locationSortedWords();
+  return _.map(sortedWords, function(word){
+    return {
+      name: word.name,
+      relative_location: (word.left_location - startingOffset)
+    };
+  });
 }
 $(function(){
   $("#hello").draggable({containment: "#jail"});
