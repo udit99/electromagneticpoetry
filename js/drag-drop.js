@@ -26,6 +26,36 @@ amp.sortedWordsWithRelativeDistances = function(){
     };
   });
 }
+
+amp.audio = {
+  playSound: function(buffer, time) {
+    var source = context.createBufferSource();
+    source.buffer = buffer;
+    source.connect(context.destination);
+    source.noteOn(time);
+  }
+};
+amp.buffers = {};
+amp.buffers.snare = null;
+amp.buffers.hihat = null;
+amp.context = new webkitAudioContext();
+amp.loadSound = function(url, hash_store, key) {
+  var request = new XMLHttpRequest();
+  request.open('GET', url, true);
+  request.responseType = 'arraybuffer';
+
+  // Decode asynchronously
+  request.onload = function() {
+    amp.context.decodeAudioData(request.response, function(buffer) {
+      hash_store[key] = buffer;
+    }, function(){console.log("erroe happened");});
+  }
+  request.send();
+}
+
+
+
+
 $(function(){
   _.each(amp.words, function(word){$("#" + word).draggable({containment: "#jail"})});
   $("#hello").draggable({containment: "#jail"});
