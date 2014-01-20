@@ -53,6 +53,7 @@ amp.playSound = function(bufferName, time) {
 
 amp.playWords = function(){
   _.each(this.sortedWordsWithRelativeDistances(), function(word){
+    amp.playSound(word.name, amp.context.currentTime + word.relative_location/1000)
   
   });
 
@@ -61,7 +62,6 @@ amp.playWords = function(){
 $(function(){
   _.each(amp.words, function(word){
     amp.loadSound("http://localhost:3002/"+ word +".wav", amp.buffers,word);
-  
   })
   _.each(amp.words, function(word){$("#" + word).draggable({containment: "#jail"})});
   $("#hello").draggable({containment: "#jail"});
