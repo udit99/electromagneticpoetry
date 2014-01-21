@@ -1,34 +1,37 @@
 #container{
-  height: 200px;
-  border: 1px solid red;
+  height: 491px;
+  width: 654px;
+  background-image: url('/images/fridge.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  display: inline-block;
 }
 #holding{
-  height: 200px;
-  border: 1px solid red;
+  height: 500px;
+  background-color: lightgray;
+  width: 654px;
+  display: inline-block;
+  float: left;
 }
-#hello{
-  width: 100px;
-  height: 100px;
-  border: 1px solid black;
-}
-#world{
-  width: 100px;
+#world, #steve, #hello{
   height: 20px;
   border: 1px solid #222222;
   background-color: white;
   text-align: center;
-  padding: 2px;
+  padding: 2px 7px;
+  border: 1px solid #AAAAAA;
   border-right: 2px solid #222222;
   border-bottom: 2px solid #222222;
   font-family: "Tahoma, Verdana, Arial, Helvetica, sans-serif";
-}
-#steve{
-  width: 100px;
-  height: 100px;
-  border: 1px solid blue;
+  display: inline-block;
 }
 #jail{
-  border: 5px solid green;
   height: 400px;
-  background-color: lightgray;
+}
+.clearfix:after {
+   content: " "; /* Older browser do not support empty content */
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
 }
