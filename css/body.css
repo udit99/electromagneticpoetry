@@ -9,7 +9,8 @@
 #holding{
   height: 500px;
   background-color: lightgray;
-  width: 654px;
+  width: 565px;
+  padding: 50px;
   display: inline-block;
   float: left;
 }
