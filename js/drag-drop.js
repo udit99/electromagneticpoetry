@@ -1,5 +1,5 @@
 var emp = {};
-emp.words = ["hello", "world", "steve"]
+emp.words = ["unconsciousness", "mosquito", "honey", "tears", "bright_eyes"]
 emp.locationSortedWords = function(){
   var words = _.map(emp.words, function(a){ 
     return {
@@ -59,16 +59,26 @@ emp.playWords = function(){
 
 }
 
+emp.createWords = function(){
+  _.each(this.words, function(word){
+    var wordElement = document.createElement("div");
+    $(wordElement).attr("id", word);
+    $(wordElement).attr("class", "word");
+    $(wordElement).text(word);
+    $("#holding").append(wordElement);
+  })
+
+}
+
 $(function(){
   _.each(emp.words, function(word){
     emp.loadSound("http://localhost:3002/"+ word +".wav", emp.buffers,word);
   })
-  _.each(emp.words, function(word){$("#" + word).draggable({containment: "#jail"})});
-  $("#hello").draggable({containment: "#jail"});
-  $("#world").draggable({containment: "#jail"});
   $("#container").droppable({
     drop: function(evt, ui){
       console.log("drop");
     } 
   })
+  emp.createWords();
+  _.each(emp.words, function(word){$("#" + word).draggable({containment: "#jail"})});
 })
